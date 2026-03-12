@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Xiaochen Sun </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111110;
+    --ink-2: #3a3a38;
+    --ink-3: #6b6b68;
+    --ink-4: #9b9b97;
+    --paper: #f7f6f2;
+    --paper-2: #eeecea;
+    --rule: #d8d6d0;
+    --accent: #1a1a18;
+    --serif: 'EB Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --max: 760px;
+    --pad: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 var(--pad);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+  }
+
+  section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  /* HERO */
+  #top {
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-name {
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-bio {
+    color: var(--ink-2);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--rule);
+    padding: 5px 12px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.15s;
+    background: transparent;
+  }
+
+  .chip:hover {
+    color: var(--ink);
+    border-color: var(--ink-3);
+    background: var(--paper-2);
+  }
+
+  .hero-photo {
+    width: 220px;
+    height: 290px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-photo-placeholder {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* FIELDS OF INTEREST */
+  .fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .field-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* SUBSECTION LABELS (within Research) */
+  .subsection-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-2);
+  }
+
+  /* PAPER ENTRIES */
+  .paper-list { display: flex; flex-direction: column; gap: 2rem; }
+
+  .paper-entry {}
+
+  .paper-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 0.3rem;
+  }
+
+  .paper-status.published { color: #2a5c3f; }
+  .paper-status.revise { color: #7a5020; }
+  .paper-status.progress { color: var(--ink-4); }
+
+  .paper-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+  }
+
+  .paper-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .paper-title a:hover { text-decoration-color: var(--ink); }
+
+  .paper-meta {
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+
+  .paper-abstract {
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    line-height: 1.65;
+    border-left: 2px solid var(--rule);
+    padding-left: 1rem;
+    margin-top: 0.6rem;
+  }
+
+  details > summary { cursor: pointer; }
+  details > summary .toggle-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    user-select: none;
+  }
+  details > summary:hover .toggle-label { color: var(--ink-3); }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* TEACHING */
+  .course-list { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .course-row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--paper-2);
+  }
+
+  .course-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .course-code {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-4);
+  }
+
+  .course-name { font-size: 1rem; color: var(--ink-2); }
+  .course-level {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    white-space: nowrap;
+  }
+
+  /* CV */
+  .cv-block { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .cv-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.5rem;
+  }
+
+  .cv-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    padding-top: 0.2rem;
+  }
+
+  .cv-institution { font-weight: 500; font-size: 1rem; color: var(--ink); }
+  .cv-role { font-size: 0.9rem; color: var(--ink-3); }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .contact-item-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-item-value {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .contact-item-value a {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+
+  .contact-item-value a:hover { text-decoration-color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2.5rem var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-4);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    #top { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .course-row { grid-template-columns: 1fr; gap: 0.2rem; }
+    .cv-row { grid-template-columns: 1fr; gap: 0.2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    nav ul { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">X. Sun</a>
+  <ul>
+    <li><a href="#fields">Fields</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="top">
+    <div>
+      <p class="hero-title">Assistant Professor of Economics</p>
+      <h1 class="hero-name">Xiaochen<br>Sun</h1>
+      <p class="hero-bio">
+        I am an Assistant Professor of Economist at New Mexico State University. My research focuses on energy and environmental economics and policy. I apply economic and econometric models to examine the impacts of a wide range of policies, including building efficiency, air pollution, and electricity markets.
+      </p>
+      <div class="hero-links">
+        <a class="chip" href="cv_xs.pdf">CV (PDF)</a>
+        <a class="chip" href="https://scholar.google.com/citations?user=i7qaNukAAAAJ&hl=en">Google Scholar</a>
+        <a class="chip" href="https://www.linkedin.com/in/xiaochen-sun-2509905/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="avatar.jpg" alt="Xiaochen Sun" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Education</p>
+    <div class="cv-block">
+      <div class="cv-row">
+        <span class="cv-year">2024</span>
+        <div>
+          <p class="cv-institution">Carnegie Mellon University</p>
+          <p class="cv-role">Ph.D. in Public Policy and Management</p>
+        </div>
+      </div>
+      <div class="cv-row">
+        <span class="cv-year">2015</span>
+        <div>
+          <p class="cv-institution">Duke University</p>
+          <p class="cv-role">M.S. in Environmental Economics and Policy</p>
+        </div>
+      </div>
+      <div class="cv-row">
+        <span class="cv-year">2013</span>
+        <div>
+          <p class="cv-institution">Renmin University of China</p>
+          <p class="cv-role">B.A. in Environmental Economics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELDS -->
+  <section id="fields">
+    <p class="section-label">Fields</p>
+    <div class="fields">
+      <span class="field-tag">Energy and Environmental Economics</span>
+      <span class="field-tag">Public Economics</span>
+      <span class="field-tag">Empirical Industrial Organization</span>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <p class="section-label">Research</p>
+
+    <!-- Publications -->
+    <p class="subsection-label">Publications</p>
+    <div class="paper-list" style="margin-bottom: 3rem;">
+
+      <div class="paper-entry">
+        <p class="paper-status published">Published</p>
+        <p class="paper-title"><a href="https://www.sciencedirect.com/science/article/pii/S0095069623000840?via%3Dihub">Does LEED Certification Save Energy? Evidence from Retrofitted Federal Buildings</a></p>
+	<p class="paper-meta">Karen Clay, Edson Severnini, and Xiaochen Sun</p>
+        <p class="paper-meta"><em>Journal of Environmental Economics and Management</em> 121: 102866, 2023. (NBER Working Paper No. 28612 and IZA Discussion Paper No. 14211)</p>
+        <details>
+          <summary><span class="toggle-label">Abstract ↓</span></summary>
+          <p class="paper-abstract">This paper examines the causal impact of LEED (Leadership in Energy & Environmental Design) certification on energy consumption among federally owned buildings that were retrofitted over the period 1990–2019. Using a difference-in-differences propensity score matching approach, the paper has two findings. First, despite energy savings being an explicit federal goal, LEED-certified retrofits of federal buildings did not have statistically significant energy savings on average. Second, LEED buildings with higher energy scores had greater energy efficiency post-certification, and the improvements were economically meaningful. The absence of energy savings on average appears to be driven by three factors — trade-offs across energy and other areas in acquiring points for certification, possible changes in energy use after the official performance period for LEED certification ended, and improvements in the energy efficiency of all federal buildings.</p>
+        </details>
+      </div>
+
+    </div>
+
+    <!-- Working Papers -->
+    <p class="subsection-label">Working papers</p>
+    <div class="paper-list" style="margin-bottom: 3rem;">
+
+      <div class="paper-entry">
+        <p class="paper-status revise">Working Paper</p>
+        <p class="paper-title"><a href="#">Can Placed-Based Incentives Accelerate the Energy Transition?</a></p>
+        <p class="paper-meta">with Gaurav Doshi and Jancy Ling Liu</p>
+        <details>
+          <summary><span class="toggle-label">Abstract ↓</span></summary>
+          <p class="paper-abstract">Abstract coming soon.</p>
+        </details>
+      </div>
+
+      <div class="paper-entry">
+        <p class="paper-status progress">Working Paper</p>
+        <p class="paper-title"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5736562">The Hidden Cost of the Cloud: Data Centers and Electricity Market Inefficiency</a></p>
+	<p class="paper-meta">(USAEE Working Paper No. 25-660)</p>
+        <p class="paper-meta">with Jamal Mamkhezri and Yuting Yang</p>
+        <details>
+          <summary><span class="toggle-label">Abstract ↓</span></summary>
+          <p class="paper-abstract">Concentrated demand growth is reshaping power systems worldwide. In electricity markets, localized load expansions interact with transmission constraints and can generate spatial differences in prices that reflect congestion rather than underlying generation costs. Understanding the magnitude and distribution of these effects is important for evaluating the consequences of large technological shocks, such as artificial intelligence–driven load growth. This paper examines how rapid data center expansion in Virginia between 2015 and 2024 affected wholesale electricity prices across census tracts. We find that transmission-related inefficiencies increased prices by $2.49 per megawatt-hour, approximately 70 percent relative to pre-expansion levels in affected areas. These effects arise from the spatial misalignment between new electricity demand from data centers and nearby generation capacity. Price increases are larger when generation is located farther from data center sites. Within census tracts where data centers and generation are co-located, inefficient pricing is lower when generation is from fossil fuel sources but higher when it is from renewable sources. Price effects are also larger during peak demand periods, in areas with more intensive data center expansion, and in predominantly non-White communities. These findings have implications for transmission planning and load siting in regions experiencing concentrated demand growth.</p>
+        </details>
+      </div>
+
+      <div class="paper-entry">
+        <p class="paper-status progress">Working Paper</p>
+        <p class="paper-title"><a href="#">Impacts of Unvertainty in Transmission Interconnection on Energy Transition</a></p>
+        <p class="paper-meta">(Winner of the 2024 USAEE Young Professional Best Paper Award Competition)</p>
+        <details>
+          <summary><span class="toggle-label">Abstract ↓</span></summary>
+          <p class="paper-abstract">This paper investigates the impact of uncertainty in interconnection cost allocation on generators’ decision to stay in the process. The study delves into a three-stage interconnection process that electric transmission system operators mandate for generators seeking grid access. Recent years have seen a surge in interconnection requests alongside a persistent trend of high project withdrawals, leading to a challenging backlog. This backlog poses a significant threat to electric grid resilience and energy transition, which is essential to combat climate change. A key reason for the high withdrawal rates is the uncertainty associated with the interconnection cost allocation under current policy. To estimate this impact, the study employs a dynamic discrete choice model with Bayesian learning to capture the evolving means and variances of interconnection cost signals across different stages of the process, as cost uncertainty decreases with progress. Parameter estimates highlight that generators are more likely to stay when cost uncertainty is high, emphasizing the value of learning. Furthermore, the effect of network upgrade costs varies by fuel source, with wind generators being most sensitive. The paper presents two counterfactual analyses to inform discussions concerning FERC Order 2023. First, I show that interconnection studies should prioritize providing more accurate information early in the process to encourage early learning, thus facilitating early decision-making to alleviate backlog issues. Second, I find increasing withdrawal penalties may not significantly address backlog concerns. Additionally, subsidy policies regarding network upgrades may be most effective when tailored to specific fuel types.</p>
+        </details>
+      </div>
+
+    </div>
+
+    <!-- In Progress -->
+    <p class="subsection-label">In progress</p>
+    <div class="paper-list">
+
+      <div class="paper-entry">
+        <p class="paper-title">When Storms Strike: Air Pollution and Health Effects of Electricity Sector Disruptions</p>
+        <p class="paper-meta">with Michael Cobar and Felipe Gomez Trejos</p>
+      </div>
+      <div class="paper-entry">
+        <p class="paper-title">Impact of a Cap-and-Trade Program on Local Air Pollution: Evidence from the Acid Rain Program</p>
+        <p class="paper-meta">with Karen Clay and Edson Severnini</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <p class="section-label">Teaching</p>
+    <div class="course-list">
+      <div class="course-row">
+        <span class="course-code">ECON 312</span>
+        <span class="course-name">Intermediate Microeconomics Theory</span>
+        <span class="course-level">2024-2026</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECON 2110G</span>
+        <span class="course-name">Principles of Macroeconomics</span>
+        <span class="course-level">2024-2026</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECON 337V</span>
+        <span class="course-name">Natural Resource Economics</span>
+        <span class="course-level">2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div>
+        <p class="contact-item-label">Email</p>
+        <p class="contact-item-value"><a href="mailto:xsun@nmsu.edu">xsun@nmsu.edu</a></p>
+      </div>
+      <div>
+        <p class="contact-item-label">Address</p>
+        <p class="contact-item-value">1320 E University Ave, Las Cruces, NM 88001</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Xiaochen Sun · New Mexico State University</p>
+  <p>Updated March 2026</p>
+</footer>
+
+</body>
+</html>
